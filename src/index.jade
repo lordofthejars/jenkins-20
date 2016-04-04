@@ -11,7 +11,7 @@ html
   head
   meta(charset='utf-8')
   meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
-  title Docker And Jenkins.
+  title Continuous Delivery as Code
 
   link(rel='stylesheet', type='text/css', href='build/build.css')
   link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')
@@ -19,6 +19,10 @@ html
   body
 
     article
+
+      +slide('title')
+        h2.gothicfont.smallgothic Continuous Delivery as <span class='important'>Code</span>
+        h3.bold with <span class='important'>Jenkins</span> and <span class='important'>Gradle</span>
 
       +slide
         div.main-wrap
@@ -30,296 +34,451 @@ html
             h2.gothicfont.important(style='font-size:1em') @alexsotob
             img(src='../images/public.png', style="width:40%")
           div.rightbar
-            img(src='images/alex.jpg', style="width:100%")
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide
-        div.dividebyfour.NW
-          img.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current(src='images/deliverybox.jpg', style="width:100%")
-        div.dividebyfour.NE
-          img.bullet.bespoke-bullet.bespoke-bullet-inactive(src='images/manual.jpg', style="width:100%")
-        div.dividebyfour.SW
-          img.bullet.bespoke-bullet.bespoke-bullet-inactive(src='images/automate.jpg', style="width:100%")
-        div.dividebyfour.SE
-          img.bullet.bespoke-bullet.bespoke-bullet-inactive(src='images/test.jpg', style="width:100%")
-      
-      +slide
-        h2 Jenkinsfile (2/2)
-        pre.small.language-javascript
-          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-              docker.image('maven:3.3.3-jdk-8').inside('-v ~/.m2/repository:/m2repo -u 1000:50') {
-                git '…your-sources…'
-                sh 'mvn -Dmaven.repo.local=/m2repo clean install'
-              }
-          
-          code.bullet.bespoke-bullet.bespoke-bullet-inactive.      
-              docker.withServer('tcp://swarm.mycorp.com:2376', 'swarm-certs') {
-                docker.image('httpd').withRun('-p 8080:80') {c ->
-                  sh "curl -i http://${hostIp(c)}:8080/"
-                }
-              }
-              def hostIp(container) {
-                sh "docker inspect -f {{.Node.Ip}} ${container.id} > hostIp"
-                readFile('hostIp').trim()
-              }
-        div.square.bullet.bespoke-bullet.bespoke-bullet-inactive Running
-        
+            img(src='images/family.jpg', style="width:100%")
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
 
-      +slide
-        iframe(src='https://localhost:57575/')
-      
-      +slide('title')
-        h1 Docker and Jenkins. 
-        h3 Orchestrating Continuous Delivery
-
-      +slide
-        img.avatar(src='images/profile.jpg')
-        h4 
-          i.fa.fa-twitter alexsotob - lordofthejars.com
-        img.cloudbees(src='images/cloudbees.png')
-        img.logos(src='images/logos.png')
+      +slide('adarise')
+        h2.biggothic.gothicfont Questions
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide('mac')
-        h1.small Software is eating the world
+        h1.small <span class='important'>Software</span> is eating the <span class='important'>world</span>
         aside(role='note') Every business is in the sw business
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-          
+
       +slide
         img.schemash(src='images/cockpit.jpg')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-          
+
       +slide
         img.schemash(src='images/tesla.jpg')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         img.schemash(src='images/tesla-update.jpg')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-          
-      +slide
-        img.schemash(src='images/tesla-news.png')
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         img.schemash(src='images/airport.png')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-          
+
       +slide
         img.schemash(src='images/casino.png')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide
+
+      +slide('speed')
         ul.lists
-          li
-            i(class='fa fa-laptop fa-3x')
-            i(class='fa fa-long-arrow-right fa-3x')
-            i(class='fa fa-server fa-3x')
-          li Faster
-          li Sooner
-          li Better
+          li.bigfont Faster
+          li.bigfont Sooner
+          li.bigfont Better
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide('ci')
-        h2 Key is Automation
-        aside(role='note') Learn from car factory, automatic and pipelined
+
+      +slide('gears')
+        h2.gothicfont What is <span class='important'>Continuous Delivery</span>?
+        aside(role='note') A Build tool? CI server? Automated tests, quality, deployment,
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
+      +slide('gears')
+        h2.gothicfont Deliver <span class='important'> Business Value</span> more <span class='important'>Frequently</span>
+        aside(role='note') Money, fast feedback
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      // +slide('pilars')
+      //  div.dividebyfour.NW
+      //    img.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current(src='images/deliverybox.jpg', style="width:100%; height:100%")
+      //  div.dividebyfour.NE
+      //    img.bullet.bespoke-bullet.bespoke-bullet-inactive(src='images/time.jpg', style="width:100%;height:100%")
+      //  div.dividebyfour.SW
+      //    img.bullet.bespoke-bullet.bespoke-bullet-inactive(src='images/automate.jpg', style="width:100%;height:100%")
+      //  div.dividebyfour.SE
+      //    img.bullet.bespoke-bullet.bespoke-bullet-inactive(src='images/test.jpg', style="width:100%;height:100%")
+      //  aside(role='note') Automate makes everything reproducible
+
       +slide
         img.schemash(src='images/pipeline.png')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-        
+
+      +slide('adabored')
+        h2.gothicfont.smallgothic No More Theory <span class='important'>Please!!</span>
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.smallgothic Acceptance Stage
+        img.schemas(src='images/compile.png')
+        aside(role='note') Notice a lot of tests, automatic tests
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.filegothic build.gradle
+        pre.small.language-javascript
+          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+              apply plugin: 'war'
+
+          br
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
+              allprojects {
+                sourceCompatibility = 1.8
+                targetCompatibility = 1.8
+
+                group = 'org.starwars'
+                version = '1.0-SNAPSHOT'
+
+                repositories {
+                  mavenCentral()
+                }
+              }
+
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
+              dependencies {
+                providedCompile 'javax:javaee-api:7.0'
+              }
+
+        div.square.bullet.bespoke-bullet.bespoke-bullet-inactive ./gradlew compileJava
+        div.square.bullet.bespoke-bullet.bespoke-bullet-inactive Gradle 2.12 > compileOnly scope
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.filegothic build.gradle
+        pre.small.language-javascript
+          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+              dependencies {
+                testCompile 'junit:junit:4.12'
+                testCompile 'org.hamcrest:hamcrest-library:1.3'
+                testCompile('org.mockito:mockito-all:1.10.19') {
+                  exclude group: 'org.hamcrest'
+                }
+              }
+
+          br
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
+              test {
+                systemProperties System.getProperties()
+                systemProperties['starwars_planets_url'] = 'http://preproduction:8080/starwars'
+              }
+
+        div.square.bullet.bespoke-bullet.bespoke-bullet-inactive ./gradlew :test
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.filegothic settings.gradle
+        pre.small.language-javascript
+          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            include 'integration-test'
+        img.schemashh(style='width:35%;height:35%', src='images/folders.png')
+        h2.gothicfont.filegothic integration-test/build.gradle
+        pre.small.language-javascript
+          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+              test {
+                if (project.hasProperty("happyPath")) {
+                    filter {
+                        includePatterns = ["org.starwars.PlanetServiceAPITest.shouldReturnTheAverage"]
+                    }
+                }
+              }
+
+        div.square.bullet.bespoke-bullet.bespoke-bullet-inactive ./gradlew :integration-test:test -PhappyPath
+
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide('pmd')
+        h2.gothicfont.smallgothic Code <span class='important'>Analysis</span>
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide('elsa')
+        h2.gothicfont.smallgothic Let Developers <span class='important'>Go</span>
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide('arquillian')
+        h2.gothicfont.smallgothic <span class='important'>Integration</span> Tests
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide('jacoco')
+        h2.gothicfont.smallgothic Code <span class='important'>Coverage</span>
+        aside(role='note') On the fly bytecode instrumentation, no modification of source code, exec
+
+      +slide
+        h2.gothicfont.filegothic build.gradle
+        pre.small.language-javascript
+          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+              apply plugin: 'jacoco'
+
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
+              jacoco {
+                toolVersion = "0.7.5.201505241946"
+              }
+
+          br
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
+              task jacocoRootTestReport(type: JacocoReport) {
+                  sourceSets sourceSets.main
+
+                  def jacocoTestFiles = ["$buildDir/jacoco/test.exec"]
+                  subprojects.each { p ->
+                      def coverageFileLocation = "$p.buildDir/jacoco/test.exec"
+                      if (new File(coverageFileLocation).exists()) {
+                          jacocoTestFiles << coverageFileLocation
+                      }
+                  }
+
+          br
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
+              &nbsp;&nbsp;&nbsp;&nbsp;executionData files(jacocoTestFiles)
+                  reports {
+                      xml.enabled false
+                      csv.enabled false
+                  }
+              }
+
+        div.square.bullet.bespoke-bullet.bespoke-bullet-inactive ./gradlew jacocoRootTestReport
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        img.schemas(src='images/coverage.png')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.smallgothic <span class='important'>Versioning</span> Strategy
+        aside(role='note') Every build is a potential release
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.filegothic 1.0-SNAPSHOT -> 1.0.134
+        img(src='images/jenkins.png')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.filegothic gradle/versioning.gradle
+        pre.small.language-javascript
+          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            import java.util.regex.Matcher
+            import java.util.regex.Pattern
+
+            Pattern SHORT_VERSION_PATTERN = ~/(\d+)\.(\d+)/
+            Pattern SNAPSHOT_SHORT_VERSION_PATTERN = ~/$WHITESPACE$SHORT_VERSION_PATTERN$SNAPSHOT_IDENTIFIER$WHITESPACE/
+            Matcher m = checkInputAgainstPattern(version, SNAPSHOT_SHORT_VERSION_PATTERN)
+
+          br
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
+            if (m) {
+                Integer major = m[0][1].toInteger()
+                Integer minor = m[0][2].toInteger()
+                project.version = new ProjectVersion(major, minor, System.env.SOURCE_BUILD_NUMBER)
+            }
+
+          br
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
+            class ProjectVersion {
+                Integer major
+                Integer minor
+                String buildNumber
+                @Override
+                String toString() {
+                    String fullVersion = "$major.$minor"
+                    if(buildNumber) fullVersion += ".$buildNumber"
+                    return fullVersion
+                }
+            }
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide('packaging')
+        h2.gothicfont.smallgothic <span class='important'>Packaging</span> Application
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.filegothic build.gradle
+        pre.small.language-javascript
+          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            allprojects {
+              apply from: "$rootDir/gradle/versioning.gradle"
+            }
+
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
+            war {
+                manifest {
+                    attributes "Implementation-Version": project.version.toString()
+                }
+            }
+        div.square.bullet.bespoke-bullet.bespoke-bullet-inactive ./gradlew assemble
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.smallgothic <span class='important'>Publishing</span>
+        aside(role='note') Store artifact into repo (artifactory/nexus) for reusing. Docker.
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.filegothic build.gradle
+        pre.small.language-javascript
+          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            apply plugin: 'maven-publish'
+
+            task sourceJar(type: Jar) {
+              from sourceSets.main.allJava
+            }
+
+            task javadocJar (type: Jar, dependsOn: javadoc) {
+                from javadoc.destinationDir
+            }
+
+          br
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
+            ext.repoUrl = "$config.binaryRepository.url/$config.binaryRepository.name"
+            publishing {
+              publications {
+                  webApp(MavenPublication){
+                    from components.web
+                    artifact sourceJar {classifier "sources"}
+                    artifact javadocJar {classifier "javadoc"}
+                  }
+              }
+              repositories {
+                maven { url repoUrl}
+              }
+            }
+
+        div.square.bullet.bespoke-bullet.bespoke-bullet-inactive ./gradlew publish
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.smallgothic Acceptance Stage
+        img.schemas(src='images/deploy.png')
+        aside(role='note') Notice a lot of tests, automatic tests, deployment same artifacts to different env
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide('serenity')
+        h2.gothicfont.smallgothic <span class='important'>Acceptance</span> Tests
+        h3 with Serenity BDD
+        aside(role='note') Automated Acceptance Testing with Style, create easy AT for JUnit, JBehave or Cucumber integrating to generate test reports (features to do, done, failing) forcing you to use the best practices (Screenplay pattern, Steps pattern, PageObjects, ...)
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.smallgothic Report
+        img.schemash(src='images/serentiy-report.png')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide('gatling')
+        h2.gothicfont.smallgothic <span class='important'>Stress</span> Tests
+        h3 with Gatling
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.smallgothic Report
+        img.schemashh(src='images/gatling-report.png')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide('contract')
+        h2.gothicfont.smallgothic <span class='important'>Contract</span> Tests
+        h3 with Pact-JVM
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.smallgothic Contract Driven Tests
+        img.schemashh(src='images/pact_two_parts.png')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide('orch')
+        h2.gothicfont.smallgothic <span class='important'>Orchestrating</span> Stages
+        h3 with Jenkins
+
       +slide
         img.schemash(src='images/jenkinseco.jpg')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide
-        img.schemash(src='images/normaldeployment.png')
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide('heat')
-        h2 speed + friction = <span class='important'>HEAT</span>
-        aside(role='note') Faster means break things faster
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide('bob')
-        h2 GO - GO - GO
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide('docker')
-        h2 Containers Codify<br/> OS Config
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-        aside(role='note') An OS level virtualization system for running multiple isolated Linux systems on a single Linux host.
 
       +slide
-        img.schemash(src='images/dockerdeployment.png')
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide('sheep')
-        h2 How I build a Docker image?
-        pre.small.language-javascript
-          code.
-            $ docker run -ti ubuntu:12.10 bash
-            
-            [a2b] apt-get update
-            [a2b] apt-get install curl
-            [a2b] exit
-            
-            $ docker commit -m "curl installed" a2b username/image
-            $ docker build .
-
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide('dockjenk')
-
-      +slide
-        h2.underline Jenkins: Docker and CD
-        
-        ul.listsleft
-          li
-            span(class='listhighlight') Docker Hub Notification:
-            span(class='description') &nbsp;triggers downstream jobs when a tagged container is pushed to Docker Hub
-          li
-            span(class='listhighlight') Docker Traceability:
-            span(class='description') &nbsp;identifies which build pushed a particular container, displays on Jenkins builds page
-          li
-            span(class='listhighlight') Docker Custom Build Environment:
-            span(class='description') &nbsp;specifies customized build environments as Docker containers 
-          li
-            span(class='listhighlight') Docker:
-            span(class='description') &nbsp;use a docker host to dynamically provision a slave, run a single build, then tear-down
-          li
-            span(class='listhighlight') Build and Publish :
-            span(class='description') &nbsp;builds projects that have a Dockerfile and pushes the resultant tagged image to Docker Hub
-          
+        img.schemashh(src='images/freestyle.png')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
 
       +slide
-        h2 Build, Test, & Deploy Docker Images from Jenkins
-        img.schemash(src='images/plugins.png' style='height:70%')
+        img.schemashh(src='images/fs-define-test.png')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
 
       +slide
-        h2 Docker Hub Notification Plugin
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide
-        img.schemash(src='images/webhookhub.png' style='height:70%')
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide
-        img.schemash(src='images/hubconf.png' style='height:70%')
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-        aside(role='note') DOCKER_TRIGGER_REPO_NAME
-
-      +slide
-        h2 Docker Traceability Plugin
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-          
-      +slide
-        img.schemash(src='images/fingerprints.png' style='height:60%')
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-        aside(role='note') Uses Jenkins artifact fingerprint as well
-      
-      +slide
-        img.schemash(src='images/listcontainers.png')
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide
-        img.schemash(src='images/dockerevents.png')
+        img.schemashh(src='images/fs-define-deploy.png')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
 
       +slide
-        h2 Docker Plugin
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide
-        img.schemash(src='images/template.png')
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide
-        h2 Docker Custom Build Environment Plugin
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide
-        img.schemash(src='images/dockercustom.png')
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide
-        img.schemash(src='images/build-docker-tag.png' style='height:30%')
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide
-        h2 Build and Publish Plugin
+        img.schemashh(src='images/fs-result-test.png')
+        aside(role='note') Spread everything
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -337,28 +496,28 @@ html
           i.fa.fa-github &nbsp;lordofthejars
 
       +slide
-        img.schemash(src='images/build-config.png')
+        img.schemashh(src='images/fs-overview.png')
+        aside(role='note') Spread everything
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide('alexoh')
-        h2 No More <span class="important">Build</span> Jobs/Up/Down<span class="important">streams</span> PLEASE!!!! 
+        h2.gothicfont.smallgothic No More <span class='important'>Jobs</span> Please
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide('orch')
-        h1 Pipeline Plugin
-        h3 Continuous Delivery as Code
-        aside(role='note') Groovy DSL 
+
+      +slide('railyard')
+        h2.gothicfont.smallgothic Jenkins <span class='important'>Pipeline</span> Plugin
+        aside(role='note') Groovy DSL
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
-        h2.underline Features of Pipeline Plugin
-        
+        h2.gothicfont.smallgothic.underline Features of Pipeline Plugin
+
         ul.lists
           li Configuration in Source Repositories
           li Less click-and-type, more code
@@ -366,225 +525,177 @@ html
           li Survives Jenkins restarts & connection losses ($)
           li Reusable Definitions
           li Build history/trend segregated per branches
-          li UI ($ -> OSS)
-          
+          li UI
+
       +slide
         img.schemash(src='images/pipelineplug.png')
-      
+
       +slide
-        h2 Jenkinsfile (1/3)
-        pre.small.language-javascript
-          code.
-            stage 'compileAndUnit'
+        h2.gothicfont.filegothic Jenkinsfile (1/3)
+        pre.small.language-groovy
+          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            stage 'compile'
             node {
-                    git branch: 'master', url: 'https://github.com/lordofthejars/starwars.git'
-                    gradle 'clean test'
+                    checkout scm
+                    sh "./gradlew clean compileJava"
                     stash excludes: 'build/', includes: '**', name: 'source'
-                    stash includes: 'build/jacoco/*.exec', name: 'unitCodeCoverage'
-                    step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/*.xml'])
             }
-            
-            stage 'codeQuality'
-            parallel 'pmd' : {
+
+          br
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
+            stage 'commitTest'
+            parallel 'unit' : {
                 node {
                     unstash 'source'
-                    gradle 'pmdMain'
-                    step([$class: 'PmdPublisher', pattern: 'build/reports/pmd/*.xml'])
+                    sh "./gradlew :test"
+                    stash includes: 'build/jacoco&#47;*.exec', name: 'unitCodeCoverage'
+                    step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/*.xml'])
                 }
-            }, 'jacoco': {
+            }, 'integration': {
                 node {
                     unstash 'source'
-                    unstash 'unitCodeCoverage'
-                    gradle 'jacocoTestReport'
+                    sh "./gradlew -PhappyPath :integration-test:test"
+                    step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/*.xml'])
                 }
             }
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide  
-        h2 Jenkinsfile (2/3)
+
+      +slide
+        h2.gothicfont.filegothic jenkins/gradle.groovy
         pre.small.language-javascript
           code.
-            stage 'assemble-binaries'
+            def assemble(String switches = null) {
+                run 'assemble', switches
+            }
+            void run(String tasks, String switches = null) {
+                String gradleCommand = "";
+                gradleCommand += './gradlew '
+                gradleCommand += tasks
+                if(switches != null) {
+                    gradleCommand += ' '
+                    gradleCommand += switches
+                }
+                sh gradleCommand.toString()
+            }
+            return this;
+        h2.gothicfont.filegothic Jenkinsfile (2/3)
+        pre.small.language-javascript
+          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            def gradle = load 'jenkins/gradle.groovy'
 
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
             node('linux') {
                 unstash 'source'
                 withEnv(["SOURCE_BUILD_NUMBER=${env.BUILD_NUMBER}"]) {
-                    gradle 'assemble'
+                    gradle.assemble()
                 }
             }
-            
+
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.filegothic Jenkinsfile (3/3)
+        pre.small.language-javascript
+          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+
             input message: "Deploy Application to QA ?"
 
+          br
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
             stage name: 'Deploy to QA', concurrency: 1
             node {
                 echo "Application Deployed to QA."
             }
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-          
-      +slide  
-        h2 Jenkinsfile (3/3)
-        pre.small.language-javascript
-          code.
-            gradle = load 'jenkins/gradle.groovy'
-            
-            withCredentials([[$class: 'UsernamePasswordMultiBinding', 
-                              credentialsId: 'MyID', usernameVariable: 'GIT_USERNAME', 
-                              passwordVariable: 'GIT_PASSWORD']]) {
+
+          br
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
+            withCredentials([[$class: 'UsernamePasswordMultiBinding',
+            credentialsId: 'MyID', usernameVariable: 'GIT_USERNAME',
+            passwordVariable: 'GIT_PASSWORD']]) {
+
               sh "git tag -a some_tag -m 'Jenkins'"
               sh "git push https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@<REPO> --tags"
             }
-            
-            def mvnHome tool 'Maven 3.3.3'
-            sh "${mvnHome}/bin/mvn -B verify"
-        img.schemash(src='images/credentials.png', style='height:20%')    
+
+        img.schemash(src='images/credentials.png', style='height:20%')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide('whale')
-        h2 Docker Pipeline Integration
-      
+        h2.gothicfont.smallgothic <span class='important'>Docker</span> Pipeline Integration
+
       +slide
-        h2 Jenkinsfile (1/2)
+        h2.gothicfont.filegothic Jenkinsfile
         pre.small.language-javascript
-          code.
+          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
               docker.withRegistry('https://lordofthejars-docker-continuous_delivery.bintray.io', 'd4fc3fa9-39f7-47ea-a57c-795642f90989') {
-                  git 'git@github.com:lordofthejars/busybox.git' 
+                  git 'git@github.com:lordofthejars/busybox.git'
                   def newApp = docker.build "lordofthejars-docker-continuous_delivery.bintray.io/lordofthejars/javatest:${env.BUILD_TAG}"
                   newApp.push()
               }
-              
+
+          br
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
               docker.image('lordofthejars/javatest').withRun {c ->
                 sh './executeTests.sh'
               }
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide
-        h2 Jenkinsfile (2/2)
-        pre.small.language-javascript
-          code.
-              docker.image('maven:3.3.3-jdk-8').inside('-v ~/.m2/repository:/m2repo -u 1000:50') {
-                git '…your-sources…'
-                sh 'mvn -Dmaven.repo.local=/m2repo clean install'
-              }
-              
-              
-              docker.withServer('tcp://swarm.mycorp.com:2376', 'swarm-certs') {
-                docker.image('httpd').withRun('-p 8080:80') {c ->
-                  sh "curl -i http://${hostIp(c)}:8080/"
-                }
-              }
-              def hostIp(container) {
-                sh "docker inspect -f {{.Node.Ip}} ${container.id} > hostIp"
-                readFile('hostIp').trim()
+
+          br
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
+              docker.image('8-jdk-alpine').inside('-v ~/.gradle:/root/.gradle -u 1000:50') {
+                // workspace is mounted inside image automatically
+                sh './gradlew compileJava'
               }
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         img.schemash(src='images/ui.png')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide('multiple')
-        h2 Different Ways of Doing Same Things with <span class='important'>DSL</span>
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide('calm')
-        h2 Simple Build for Pipeline Plugin
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide
-        h2 Jenkinsfile
-        pre.small.language-javascript
-          code.
-              simpleBuild {
-                machine = "hi-speed"
-                docker = "java:1.9"
-                
-                env = [
-                  FOO : 42,
-                  BAR : "YASS"
-                ]
-                
-                git_repo = "https://github.com/cloudbeers/PR-demo"
-    
-                before_script = "echo before"
-                script = 'echo after $FOO'
-                after_script = 'echo done now'
-      
-                notifications = [
-                  email : "foo@bar.com"
-                ]
-              }
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-      
+
+      // +slide
+      //  iframe(src='https://localhost:57575/')
+
       +slide('adathink')
-        h1 Let's wind <br/> down
+        h2.gothicfont.smallgothic Let's <span class='important'>wind down</span>
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide
-        h2.underline Conclusions
-        
-        ul.lists
-          li Automation is the Key
-          li Docker Simplifies Environment Problems
-          li Jenkins is Ready For Docker and CD
-          li Pipleline as Code gives you Freedom
-        
-        aside(role='note') Docker in Prod or helper
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide('puzzle')
-        h2 Only One Piece of the Jigsaw
+        h2.gothicfont.smallgothic <span class='important'>Only One</span> Piece of <br/> the <span class='important'>Jigsaw</span>
         aside(role='note') Test, Culture, Metrics, have a crappy process and you automate it, you get a crappy automated process
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-          
+
       +slide('penalty')
         h2 Follow the Rules, Adapt to your Needs
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-          
+
       +slide
         h2 CloudBees
         i.fa.fa-heart.important.fa-2x
         h2 Jenkins
-      
+
       +slide('deming')
-        h3 It is not necessary to change. <br/> Survival is not mandatory.
+        h3.bold It is <span class='important'>not necessary</span> to change. <br/> <span class='important'>Survival</span> is <span class='important'>not mandatory</span>.
         h4 W. Edwards Deming
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
 
-      
-      +slide('adarise')
-        h1 Questions
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         img.avatar(src='images/profile.jpg')
         br
@@ -596,24 +707,24 @@ html
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
-        a(href='github.com/lordofthejars/starwars', style='border:none')  
+        a(href='github.com/lordofthejars/starwars', style='border:none')
           h5(style='font-size: .55em') https://github.com/lordofthejars/starwars
-        a(href='https://wiki.jenkins-ci.org/display/JENKINS/Pipeline+Plugin', style='border:none')  
+        a(href='https://wiki.jenkins-ci.org/display/JENKINS/Pipeline+Plugin', style='border:none')
           h5(style='font-size: .55em') https://wiki.jenkins-ci.org/display/JENKINS/Pipeline+Plugin
-        a(href='https://wiki.jenkins-ci.org/display/JENKINS/CloudBees+Docker+Pipeline+Plugin', style='border:none')  
+        a(href='https://wiki.jenkins-ci.org/display/JENKINS/CloudBees+Docker+Pipeline+Plugin', style='border:none')
           h5(style='font-size: .55em') https://wiki.jenkins-ci.org/display/JENKINS/CloudBees+Docker+Pipeline+Plugin
-        a(href='https://wiki.jenkins-ci.org/display/JENKINS/CloudBees+Docker+Traceability', style='border:none')  
+        a(href='https://wiki.jenkins-ci.org/display/JENKINS/CloudBees+Docker+Traceability', style='border:none')
           h5(style='font-size: .55em') https://wiki.jenkins-ci.org/display/JENKINS/CloudBees+Docker+Traceability
-        a(href='https://wiki.jenkins-ci.org/display/JENKINS/CloudBees+Docker+Build+and+Publish+plugin', style='border:none')  
+        a(href='https://wiki.jenkins-ci.org/display/JENKINS/CloudBees+Docker+Build+and+Publish+plugin', style='border:none')
           h5(style='font-size: .55em') https://wiki.jenkins-ci.org/display/JENKINS/CloudBees+Docker+Build+and+Publish+plugin
-        a(href='https://wiki.jenkins-ci.org/display/JENKINS/CloudBees+Docker+Hub+Notification', style='border:none')  
+        a(href='https://wiki.jenkins-ci.org/display/JENKINS/CloudBees+Docker+Hub+Notification', style='border:none')
           h5(style='font-size: .55em') https://wiki.jenkins-ci.org/display/JENKINS/CloudBees+Docker+Hub+Notification
-        a(href='https://wiki.jenkins-ci.org/display/JENKINS/Docker+Plugin', style='border:none')  
+        a(href='https://wiki.jenkins-ci.org/display/JENKINS/Docker+Plugin', style='border:none')
           h5(style='font-size: .55em') https://wiki.jenkins-ci.org/display/JENKINS/Docker+Plugin
-        a(href='https://github.com/jenkinsci/simple-build-for-pipeline-plugin')  
+        a(href='https://github.com/jenkinsci/simple-build-for-pipeline-plugin')
           h5(style='font-size: .55em') https://github.com/jenkinsci/simple-build-for-pipeline-plugin
-          
-      
+
+
     script(src='build/build.js')
