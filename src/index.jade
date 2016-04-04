@@ -129,7 +129,7 @@ html
           i.fa.fa-github &nbsp;lordofthejars
 
       +slide
-        h2.gothicfont.smallgothic Acceptance Stage
+        h2.gothicfont.smallgothic Commit Stage
         img.schemas(src='images/compile.png')
         aside(role='note') Notice a lot of tests, automatic tests
         div.footer
@@ -191,12 +191,21 @@ html
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
 
+      +slide('test')
+        h2.gothicfont.smallgothic <span class='important'>Unit</span> tests are <br/>not <span class='important'>Enough</span>
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        img.schemashh(style='width:75%;height:75%', src='images/folders.png')
+
       +slide
         h2.gothicfont.filegothic settings.gradle
         pre.small.language-javascript
           code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
             include 'integration-test'
-        img.schemashh(style='width:35%;height:35%', src='images/folders.png')
+
         h2.gothicfont.filegothic integration-test/build.gradle
         pre.small.language-javascript
           code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
@@ -221,7 +230,7 @@ html
           i.fa.fa-github &nbsp;lordofthejars
 
       +slide('elsa')
-        h2.gothicfont.smallgothic Let Developers <span class='important'>Go</span>
+        h2.gothicfont.smallgothic Let <span class='important'>Developers</span> Go
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -565,10 +574,12 @@ html
       +slide
         h2.gothicfont.filegothic jenkins/gradle.groovy
         pre.small.language-javascript
-          code.
+          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
             def assemble(String switches = null) {
                 run 'assemble', switches
             }
+
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
             void run(String tasks, String switches = null) {
                 String gradleCommand = "";
                 gradleCommand += './gradlew '
@@ -579,10 +590,12 @@ html
                 }
                 sh gradleCommand.toString()
             }
+
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
             return this;
         h2.gothicfont.filegothic Jenkinsfile (2/3)
         pre.small.language-javascript
-          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
             def gradle = load 'jenkins/gradle.groovy'
 
           code.bullet.bespoke-bullet.bespoke-bullet-inactive.
@@ -678,7 +691,7 @@ html
           i.fa.fa-github &nbsp;lordofthejars
 
       +slide('penalty')
-        h2 Follow the Rules, Adapt to your Needs
+        h2.gothicfont.smallgothic Follow the <span class='important'>Rules</span>, <br/>Adapt to your <span class='important'>Needs</span>
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
