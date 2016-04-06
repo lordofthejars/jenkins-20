@@ -60,12 +60,6 @@ html
           i.fa.fa-github &nbsp;lordofthejars
 
       +slide
-        img.schemash(src='images/tesla.jpg')
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide
         img.schemash(src='images/tesla-update.jpg')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
@@ -519,7 +513,7 @@ html
           i.fa.fa-github &nbsp;lordofthejars
 
       +slide('railyard')
-        h2.gothicfont.smallgothic Jenkins <span class='important'>Pipeline</span> Plugin
+        h2.gothicfont.smallgothic Jenkins <span class='important'>Pipeline-as-Code</span>
         aside(role='note') Groovy DSL
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
@@ -623,18 +617,18 @@ html
             stage name: 'Deploy to QA', concurrency: 1
             node {
                 echo "Application Deployed to QA."
-            }
-
+        
           br
           code.bullet.bespoke-bullet.bespoke-bullet-inactive.
-            withCredentials([[$class: 'UsernamePasswordMultiBinding',
-            credentialsId: 'MyID', usernameVariable: 'GIT_USERNAME',
-            passwordVariable: 'GIT_PASSWORD']]) {
+            &nbsp;&nbsp;  withCredentials([[$class: 'UsernamePasswordMultiBinding',
+            &nbsp;&nbsp;  credentialsId: 'MyID', usernameVariable: 'GIT_USERNAME',
+            &nbsp;&nbsp;  passwordVariable: 'GIT_PASSWORD']]) {
 
-              sh "git tag -a some_tag -m 'Jenkins'"
-              sh "git push https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@<REPO> --tags"
+            &nbsp;&nbsp;    sh "git tag -a some_tag -m 'Jenkins'"
+            &nbsp;&nbsp;    sh "git push https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@<REPO> --tags"
+            &nbsp;&nbsp;  }
+            &nbsp;&nbsp;  hipchatSend(message: 'Build tagged')
             }
-
         img.schemash(src='images/credentials.png', style='height:20%')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
@@ -665,15 +659,38 @@ html
                 // workspace is mounted inside image automatically
                 sh './gradlew compileJava'
               }
+        aside(role='note') Multiple scm
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
 
+          
       +slide
         img.schemash(src='images/ui.png')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
+
+      +slide('branch')
+        h2.gothicfont.smallgothic <span class='important'>Multibranch</span> Pipeline
+        aside(role='note') Jenkinsfile
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
+      +slide
+        h2.gothicfont.filegothic Multibranch Pipeline job
+        img.schemas(src='images/multibranch.png')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars      
+      
+      +slide
+        h2.gothicfont.filegothic Dashboard with detected Branches
+        img.schemas(src='images/multibranchrun.png')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars  
 
       // +slide
       //  iframe(src='https://localhost:57575/')
