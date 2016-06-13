@@ -21,8 +21,8 @@ html
     article
 
       +slide('title')
-        h2.gothicfont.smallgothic Continuous Delivery as <span class='important'>Code</span>
-        h3.bold with <span class='important'>Jenkins</span> and <span class='important'>Gradle</span>
+        h2.gothicfont.smallgothic Continuous Delivery of <span class='important'>microservices</span>
+        h3.bold using <span class='important'>Jenkins</span> and <span class='important'>Gradle</span>
         i.fa.fa-twitter-square <span class='gothicfont' style='font-size:1em; letter-spacing: 0.05em;'>&nbsp;alexsotob &nbsp;</span>
       
       +slide
@@ -48,7 +48,7 @@ html
 
       +slide('mac')
         h1.small <span class='important'>Software</span> is eating the <span class='important'>world</span>
-        aside(role='note') Every business is in the sw business
+        aside(role='note') Every business is in the sw business, even landed ni traditional business Uber, AirBnb, JustEat
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -95,7 +95,7 @@ html
 
       +slide('money')
         h2.gothicfont Deliver <span class='important'> Business Value</span> more <span class='important'>Frequently</span>
-        aside(role='note') Money, fast feedback
+        aside(role='note') Money, fast feedback, and of course you need to automate
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -126,7 +126,7 @@ html
       +slide
         h2.gothicfont.smallgothic Commit Stage
         img.schemas(src='images/compile.png')
-        aside(role='note') Notice a lot of tests, automatic tests
+        aside(role='note') Notice a lot of tests, automatic tests, Gradle is a built tool written as Groovy DSL
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -161,7 +161,30 @@ html
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-
+      
+      +slide
+        h2.gothicfont.filegothic build.gradle (with BOM support)
+        pre.small.language-javascript
+          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            plugins {
+              id "io.spring.dependency-management" version "0.5.6.RELEASE"
+            }
+            
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
+            dependencyManagement {
+              imports {
+                mavenBom 'io.spring.platform:platform-bom:1.1.1.RELEASE'
+              }
+            }
+          
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
+            dependencies {
+              compile 'org.springframework:spring-core'
+            }
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+      
       +slide
         h2.gothicfont.filegothic build.gradle
         pre.small.language-javascript
@@ -475,32 +498,14 @@ html
           i.fa.fa-github &nbsp;lordofthejars
 
       +slide
-        img.schemashh(src='images/fs-define-deploy.png')
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide
-        img.schemashh(src='images/fs-result-test.png')
+        img.schemashh(src='images/fs-overview.png')
         aside(role='note') Spread everything
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-
-      +slide
-        img.schemash(src='images/archiveartifacts.png' style='height:70%')
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide
-        img.schemash(src='images/copyartifacts.png')
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide
-        img.schemashh(src='images/fs-overview.png')
+      
+      +slide('micro')
+        h2.gothicfont.smallgothic Microservices <span class='important'>Problem</span>
         aside(role='note') Spread everything
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
