@@ -1,11 +1,11 @@
 {
-  "name": "Continuous-Delivery-As-Code",
+  "name": "Jenkins-20",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:lordofthejars/continuous-delivery-as-code.git"
+    "url": "git@github.com:lordofthejars/jenkins-20.git"
   },
   "scripts": {
     "serve": "gulp serve",

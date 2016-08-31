@@ -11,7 +11,7 @@ html
   head
   meta(charset='utf-8')
   meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
-  title Continuous Delivery as Code
+  title Jenkins Pipeline, Jenkins 2.0 and Beyond
 
   link(rel='stylesheet', type='text/css', href='build/build.css')
   link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')
@@ -21,8 +21,7 @@ html
     article
 
       +slide('title')
-        h2.gothicfont.smallgothic Continuous Delivery of <span class='important'>microservices</span>
-        h3.bold using <span class='important'>Jenkins</span> and <span class='important'>Gradle</span>
+        h2.gothicfont.smallgothic Jenkins Pipeline, Jenkins 2.0 and <span class='important'>Beyond</span>
         i.fa.fa-twitter-square <span class='gothicfont' style='font-size:1em; letter-spacing: 0.05em;'>&nbsp;alexsotob &nbsp;</span>
       
       +slide
@@ -30,7 +29,7 @@ html
           div.leftbar
             h2.gothicfont(style='font-size:2em') Alex Soto
             br
-            h2.gothicfont.important(style='font-size:1em') CloudBees Engineer
+            h2.gothicfont.important(style='font-size:1em') Red Hat Engineer
             h2.gothicfont(style='font-size:1em') Open Source Advocate
             h2.gothicfont.important(style='font-size:1em') @alexsotob
             img(src='../images/public.png', style="width:40%")
@@ -48,7 +47,7 @@ html
 
       +slide('mac')
         h1.small <span class='important'>Software</span> is eating the <span class='important'>world</span>
-        aside(role='note') Every business is in the sw business, even landed ni traditional business Uber, AirBnb, JustEat
+        aside(role='note') Every business is in the sw business, even landed in traditional business Uber, AirBnb, JustEat
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -61,6 +60,12 @@ html
 
       +slide
         img.schemash(src='images/tesla-update.jpg')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        img.schemash(src='images/tesla-news.png')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -86,7 +91,7 @@ html
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
 
-      +slide('gears')
+      +slide('world')
         h2.gothicfont What is <span class='important'>Continuous Delivery</span>?
         aside(role='note') A Build tool? CI server? Automated tests, quality, deployment,
         div.footer
@@ -94,383 +99,14 @@ html
           i.fa.fa-github &nbsp;lordofthejars
 
       +slide('money')
-        h2.gothicfont Deliver <span class='important'> Business Value</span> more <span class='important'>Frequently</span>
+        h2.gothicfont Deliver <span class='green'> Business Value</span> more <span class='green'>Frequently</span>
         aside(role='note') Money, fast feedback, and of course you need to automate
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
 
-      // +slide('pilars')
-      //  div.dividebyfour.NW
-      //    img.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current(src='images/deliverybox.jpg', style="width:100%; height:100%")
-      //  div.dividebyfour.NE
-      //    img.bullet.bespoke-bullet.bespoke-bullet-inactive(src='images/time.jpg', style="width:100%;height:100%")
-      //  div.dividebyfour.SW
-      //    img.bullet.bespoke-bullet.bespoke-bullet-inactive(src='images/automate.jpg', style="width:100%;height:100%")
-      //  div.dividebyfour.SE
-      //    img.bullet.bespoke-bullet.bespoke-bullet-inactive(src='images/test.jpg', style="width:100%;height:100%")
-      //  aside(role='note') Automate makes everything reproducible
-
       +slide
         img.schemash(src='images/pipeline.png')
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide('adabored')
-        h2.gothicfont.smallgothic No More Theory <span class='important'>Please!!</span>
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide
-        h2.gothicfont.smallgothic Commit Stage
-        img.schemas(src='images/compile.png')
-        aside(role='note') Notice a lot of tests, automatic tests, Gradle is a built tool written as Groovy DSL
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide
-        h2.gothicfont.filegothic build.gradle
-        pre.small.language-javascript
-          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-              apply plugin: 'war'
-
-          br
-          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
-              allprojects {
-                sourceCompatibility = 1.8
-                targetCompatibility = 1.8
-
-                group = 'org.starwars'
-                version = '1.0-SNAPSHOT'
-
-                repositories {
-                  mavenCentral()
-                }
-              }
-
-          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
-              dependencies {
-                providedCompile 'javax:javaee-api:7.0'
-              }
-
-        div.square.bullet.bespoke-bullet.bespoke-bullet-inactive ./gradlew compileJava
-        div.square.bullet.bespoke-bullet.bespoke-bullet-inactive Gradle 2.12 > compileOnly scope
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide
-        h2.gothicfont.filegothic build.gradle (with BOM support)
-        pre.small.language-javascript
-          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            plugins {
-              id "io.spring.dependency-management" version "0.5.6.RELEASE"
-            }
-            
-          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
-            dependencyManagement {
-              imports {
-                mavenBom 'io.spring.platform:platform-bom:1.1.1.RELEASE'
-              }
-            }
-          
-          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
-            dependencies {
-              compile 'org.springframework:spring-core'
-            }
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide
-        h2.gothicfont.filegothic build.gradle
-        pre.small.language-javascript
-          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-              dependencies {
-                testCompile 'junit:junit:4.12'
-                testCompile 'org.hamcrest:hamcrest-library:1.3'
-                testCompile('org.mockito:mockito-all:1.10.19') {
-                  exclude group: 'org.hamcrest'
-                }
-              }
-
-          br
-          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
-              test {
-                systemProperties System.getProperties()
-                systemProperties['starwars_planets_url'] = 'http://preproduction:8080/starwars'
-              }
-
-        div.square.bullet.bespoke-bullet.bespoke-bullet-inactive ./gradlew :test
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide('test')
-        h2.gothicfont.smallgothic <span class='important'>Unit</span> tests are <br/>not <span class='important'>Enough</span>
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide
-        img.schemashh(style='width:75%;height:75%', src='images/folders.png')
-
-      +slide
-        h2.gothicfont.filegothic settings.gradle
-        pre.small.language-javascript
-          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            include 'integration-test'
-
-        h2.gothicfont.filegothic integration-test/build.gradle
-        pre.small.language-javascript
-          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-              test {
-                if (project.hasProperty("happyPath")) {
-                    filter {
-                        includePatterns = ["org.starwars.PlanetServiceAPITest.shouldReturnTheAverage"]
-                    }
-                }
-              }
-
-        div.square.bullet.bespoke-bullet.bespoke-bullet-inactive ./gradlew :integration-test:test -PhappyPath
-
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide('pmd')
-        h2.gothicfont.smallgothic Code <span class='important'>Analysis</span>
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide('elsa')
-        h2.gothicfont.smallgothic Let <span class='important'>Developers</span> Go
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide('arquillian')
-        h2.gothicfont.smallgothic <span class='important'>Integration</span> Tests
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide('jacoco')
-        h2.gothicfont.smallgothic Code <span class='important'>Coverage</span>
-        aside(role='note') On the fly bytecode instrumentation, no modification of source code, exec
-
-      +slide
-        h2.gothicfont.filegothic build.gradle
-        pre.small.language-javascript
-          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-              apply plugin: 'jacoco'
-
-          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
-              jacoco {
-                toolVersion = "0.7.5.201505241946"
-              }
-
-          br
-          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
-              task jacocoRootTestReport(type: JacocoReport) {
-                  sourceSets sourceSets.main
-
-                  def jacocoTestFiles = ["$buildDir/jacoco/test.exec"]
-                  subprojects.each { p ->
-                      def coverageFileLocation = "$p.buildDir/jacoco/test.exec"
-                      if (new File(coverageFileLocation).exists()) {
-                          jacocoTestFiles << coverageFileLocation
-                      }
-                  }
-
-          br
-          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
-              &nbsp;&nbsp;&nbsp;&nbsp;executionData files(jacocoTestFiles)
-                  reports {
-                      xml.enabled false
-                      csv.enabled false
-                  }
-              }
-
-        div.square.bullet.bespoke-bullet.bespoke-bullet-inactive ./gradlew jacocoRootTestReport
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide
-        img.schemas(src='images/coverage.png')
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide('version')
-        h2.gothicfont.smallgothic <span class='important'>Versioning</span> Strategy
-        aside(role='note') Every build is a potential release
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide
-        h2.gothicfont.filegothic 1.0-SNAPSHOT -> 1.0.134
-        img(src='images/jenkins.png')
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide
-        h2.gothicfont.filegothic gradle/versioning.gradle
-        pre.small.language-javascript
-          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            import java.util.regex.Matcher
-            import java.util.regex.Pattern
-
-            Pattern SHORT_VERSION_PATTERN = ~/(\d+)\.(\d+)/
-            Pattern SNAPSHOT_SHORT_VERSION_PATTERN = ~/$WHITESPACE$SHORT_VERSION_PATTERN$SNAPSHOT_IDENTIFIER$WHITESPACE/
-            Matcher m = checkInputAgainstPattern(version, SNAPSHOT_SHORT_VERSION_PATTERN)
-
-          br
-          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
-            if (m) {
-                Integer major = m[0][1].toInteger()
-                Integer minor = m[0][2].toInteger()
-                project.version = new ProjectVersion(major, minor, System.env.SOURCE_BUILD_NUMBER)
-            }
-
-          br
-          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
-            class ProjectVersion {
-                Integer major
-                Integer minor
-                String buildNumber
-                @Override
-                String toString() {
-                    String fullVersion = "$major.$minor"
-                    if(buildNumber) fullVersion += ".$buildNumber"
-                    return fullVersion
-                }
-            }
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide('packaging')
-        h2.gothicfont.smallgothic <span class='important'>Packaging</span> Application
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide
-        h2.gothicfont.filegothic build.gradle
-        pre.small.language-javascript
-          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            allprojects {
-              apply from: "$rootDir/gradle/versioning.gradle"
-            }
-
-          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
-            war {
-                manifest {
-                    attributes "Implementation-Version": project.version.toString()
-                }
-            }
-        div.square.bullet.bespoke-bullet.bespoke-bullet-inactive ./gradlew assemble
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide('books')
-        h2.gothicfont.smallgothic <span class='important'>Publishing</span>
-        aside(role='note') Store artifact into repo (artifactory/nexus) for reusing. Docker.
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide
-        h2.gothicfont.filegothic build.gradle
-        pre.small.language-javascript
-          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            apply plugin: 'maven-publish'
-
-            task sourceJar(type: Jar) {
-              from sourceSets.main.allJava
-            }
-
-            task javadocJar (type: Jar, dependsOn: javadoc) {
-                from javadoc.destinationDir
-            }
-
-          br
-          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
-            ext.repoUrl = "$config.binaryRepository.url/$config.binaryRepository.name"
-            publishing {
-              publications {
-                  webApp(MavenPublication){
-                    from components.web
-                    artifact sourceJar {classifier "sources"}
-                    artifact javadocJar {classifier "javadoc"}
-                  }
-              }
-              repositories {
-                maven { url repoUrl}
-              }
-            }
-
-        div.square.bullet.bespoke-bullet.bespoke-bullet-inactive ./gradlew publish
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide
-        h2.gothicfont.smallgothic Acceptance Stage
-        img.schemas(src='images/deploy.png')
-        aside(role='note') Notice a lot of tests, automatic tests, deployment same artifacts to different env
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide('serenity')
-        h2.gothicfont.smallgothic <span class='important'>Acceptance</span> Tests
-        h3 with Serenity BDD
-        aside(role='note') Automated Acceptance Testing with Style, create easy AT for JUnit, JBehave or Cucumber integrating to generate test reports (features to do, done, failing) forcing you to use the best practices (Screenplay pattern, Steps pattern, PageObjects, ...)
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide
-        h2.gothicfont.smallgothic Report
-        img.schemash(src='images/serentiy-report.png')
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide('gatling')
-        h2.gothicfont.smallgothic <span class='important'>Stress</span> Tests
-        h3 with Gatling
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide
-        h2.gothicfont.smallgothic Report
-        img.schemashh(src='images/gatling-report.png')
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide('contract')
-        h2.gothicfont.smallgothic <span class='important'>Contract</span> Tests
-        h3 with Pact-JVM
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide
-        h2.gothicfont.smallgothic Contract Driven Tests
-        img.schemashh(src='images/pact_two_parts.png')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -485,14 +121,28 @@ html
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
 
+          
+      +slide
+        h2.gothicfont.smappgothic Jenkins 1.XXX
+        img(src='images/jenkins.png')
+        div.footer
+            i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+            i.fa.fa-github &nbsp;lordofthejars
+
       +slide
         img.schemashh(src='images/freestyle.png')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-
+      
       +slide
         img.schemashh(src='images/fs-define-test.png')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        img.schemashh(src='images/fs-define-deploy.png')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -503,10 +153,9 @@ html
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
-      +slide('micro')
-        h2.gothicfont.smallgothic Microservices <span class='important'>Problem</span>
-        aside(role='note') Spread everything
+
+      +slide
+        img.schemashh(src='images/fs-result-test.png')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -669,6 +318,11 @@ html
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
 
+      +slide('gears')
+        h2.gothicfont.smallgothic <span class='important'>Demo Time</span>
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
           
       +slide
         img.schemash(src='images/ui.png')
@@ -698,7 +352,7 @@ html
           i.fa.fa-github &nbsp;lordofthejars  
 
       // +slide
-      //  iframe(src='https://localhost:57575/')
+      //  https://wiki.jenkins-ci.org/display/JENKINS/Jenkins+2.0
 
       +slide('adathink')
         h2.gothicfont.smallgothic Let's <span class='important'>wind down</span>
