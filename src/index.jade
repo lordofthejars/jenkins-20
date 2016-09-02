@@ -116,6 +116,12 @@ html
         h3 with Jenkins
 
       +slide
+        img.schemash(src='images/cireport.png')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+          
+      +slide
         img.schemash(src='images/jenkinseco.jpg')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
@@ -162,6 +168,11 @@ html
 
       +slide('alexoh')
         h2.gothicfont.smallgothic No More <span class='important'>Jobs</span> Please
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide('jenkins2')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -317,15 +328,15 @@ html
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-
-      +slide('gears')
-        h2.gothicfont.smallgothic <span class='important'>Demo Time</span>
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
           
       +slide
         img.schemash(src='images/ui.png')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide('gears')
+        h2.gothicfont.smallgothic <span class='important'>Demo Time</span>
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -351,32 +362,134 @@ html
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars  
 
+      +slide
+        h2.gothicfont.smallgothic <span class='important'>Parallel Test Executor</span> Plugin
+        aside(role='note') Unused resources
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars  
+
+      +slide
+        img.schemash(src='images/testp.png')
+        aside(role='note') test execution time last run and split multiple units of equal size
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.filegothic Jenkinsfile
+        pre.small.language-javascript
+          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            def splits = splitTests generateInclusions: true, parallelism: [$class: 'CountDrivenParallelism', size: 3]
+          br
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.  
+            def branches = [:]
+            for (int i = 0; i < splits.size(); i++) {
+              def split = splits[i]
+              branches["split${i}"] = {
+          br
+          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
+                &nbsp;&nbsp;  node('hi-speed') {
+                &nbsp;&nbsp;    unstash 'source'
+                &nbsp;&nbsp;      writeFile file: (split.includes ? 'inclusions.txt' : 'exclusions.txt'), text: split.list.join("\n")
+                &nbsp;&nbsp;      writeFile file: (split.includes ? 'exclusions.txt' : 'inclusions.txt'), text: ''
+
+                &nbsp;&nbsp;      sh './gradlew clean :test'
+                &nbsp;&nbsp;  }
+                &nbsp;&nbsp;}
+                }    
+          br
+          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
+            parallel branches
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide('dashboard')
+        h2.gothicfont.smallgothic UI <span class='important'>improvements</span>
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+          
       // +slide
       //  https://wiki.jenkins-ci.org/display/JENKINS/Jenkins+2.0
 
+      +slide('direction')
+        h2.gothicfont.smallgothic What is <span class='important'>Coming</span>
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide('sea')
+        h2.gothicfont.smallgothic <span class='important'>Blue Ocean</span>
+        h3. New UX for Jenkins
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        img.schemash(src='images/pipeline-run.png')
+        aside(role='note') Pipeline run
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        img.schemash(src='images/pipeline-dashboard.png')
+        aside(role='note') Pipeline dashboard
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        img.schemash(src='images/failing-pipeline.png')
+        aside(role='note') Failing Pipeline
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide('gears')
+        h2.gothicfont.smallgothic <span class='important'>Demo Time</span>
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide('puzzle')
+        h2.gothicfont.smallgothic <span class='important'>Missing</span> Pieces
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        h2.gothicfont.smallgothic.underline Future Changes
+
+        ul.lists
+          li Scalability
+          li Configuration API
+          li Storage Backend Changes
+        
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+          
       +slide('adathink')
         h2.gothicfont.smallgothic Let's <span class='important'>wind down</span>
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
 
-      +slide('puzzle')
-        h2.gothicfont.smallgothic <span class='important'>Only One</span> Piece of <br/> the <span class='important'>Jigsaw</span>
-        aside(role='note') Test, Culture, Metrics, have a crappy process and you automate it, you get a crappy automated process
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide('penalty')
-        h2.gothicfont.smallgothic Follow the <span class='important'>Rules</span>, <br/>Adapt to your <span class='important'>Needs</span>
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
       +slide
-        h2 CloudBees
-        i.fa.fa-heart.important.fa-2x
-        h2 Jenkins
+        h2.gothicfont.smallgothic.underline Conclusions
+
+        ul.lists
+          li Pipeline as Code for Microservices
+          li Easy migration from Jenkins 1.X to 2.X
+          li More changes in near future
+          li Jenkins as Platform
+            
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
 
       +slide('deming')
         h4 It is <span class='important'>not necessary</span> to change. <br/> <span class='important'>Survival</span> is <span class='important'>not mandatory</span>.
@@ -389,35 +502,13 @@ html
       +slide
         img.avatar(src='images/profile.jpg')
         br
-        a(href='http://www.slideshare.net/asotobu/continuous-delivery-as-code', style='border:none')
+        a(href='http://www.slideshare.net/asotobu/jenkins-20', style='border:none')
           i.fa.fa-slideshare
-          h3 http://www.slideshare.net/asotobu/continuous-delivery-as-code
+          h3 http://www.slideshare.net/asotobu/jenkins-20
           i.fa.fa-envelope
           h3 asotobu@gmail.com
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-
-      +slide
-        a(href='github.com/lordofthejars/starwars', style='border:none')
-          h5(style='font-size: .55em') https://github.com/lordofthejars/starwars
-        a(href='https://jenkins.io/', style='border:none')
-          h5(style='font-size: .55em') https://jenkins.io/
-        a(href='https://jenkins.io/solutions/pipeline/', style='border:none')
-          h5(style='font-size: .55em') https://jenkins.io/solutions/pipeline/
-        a(href='http://arquillian.org/', style='border:none')
-          h5(style='font-size: .55em') http://arquillian.org/
-        a(href='http://www.thucydides.info/', style='border:none')
-          h5(style='font-size: .55em') http://www.thucydides.info/
-        a(href='http://gatling.io/', style='border:none')
-          h5(style='font-size: .55em') http://gatling.io/
-        a(href='https://github.com/DiUS/pact-jvm', style='border:none')
-          h5(style='font-size: .55em') https://github.com/DiUS/pact-jvm
-        a(href='https://gradle.org/')
-          h5(style='font-size: .55em') https://gradle.org/
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
 
     script(src='build/build.js')
