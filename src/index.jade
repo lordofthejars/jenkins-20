@@ -23,7 +23,7 @@ html
       +slide('title')
         h2.gothicfont.smallgothic Jenkins Pipeline, Jenkins 2.0 and <span class='important'>Beyond</span>
         i.fa.fa-twitter-square <span class='gothicfont' style='font-size:1em; letter-spacing: 0.05em;'>&nbsp;alexsotob &nbsp;</span>
-      
+
       +slide
         div.main-wrap
           div.leftbar
@@ -54,12 +54,6 @@ html
 
       +slide
         img.schemash(src='images/cockpit.jpg')
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide
-        img.schemash(src='images/tesla-update.jpg')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -120,14 +114,14 @@ html
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-          
+
       +slide
         img.schemash(src='images/jenkinseco.jpg')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
 
-          
+
       +slide
         h2.gothicfont.smappgothic Jenkins 1.XXX
         img(src='images/jenkins.png')
@@ -140,7 +134,7 @@ html
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         img.schemashh(src='images/fs-define-test.png')
         div.footer
@@ -185,7 +179,7 @@ html
           i.fa.fa-github &nbsp;lordofthejars
 
       +slide
-        h2.gothicfont.smallgothic.underline Features of Pipeline Plugin
+        h2.gothicfont.smallgothic.underline Features of Pipeline Ecosystem
 
         ul.lists
           li Configuration in Source Repositories
@@ -200,32 +194,34 @@ html
         img.schemash(src='images/pipelineplug.png')
 
       +slide
-        h2.gothicfont.filegothic Jenkinsfile (1/3)
+        h2.gothicfont.filegothic Jenkinsfile (1/2)
         pre.small.language-groovy
           code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            stage 'compile'
-            node {
+            stage ('compile') {
+              node {
                     checkout scm
                     sh "./gradlew clean compileJava"
                     stash excludes: 'build/', includes: '**', name: 'source'
+              }
             }
 
           br
           code.bullet.bespoke-bullet.bespoke-bullet-inactive.
-            stage 'commitTest'
-            parallel 'unit' : {
+            stage ('commitTest') {
+              parallel 'unit' : {
                 node {
                     unstash 'source'
                     sh "./gradlew :test"
                     stash includes: 'build/jacoco&#47;*.exec', name: 'unitCodeCoverage'
                     step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/*.xml'])
                 }
-            }, 'integration': {
+              }, 'integration': {
                 node {
                     unstash 'source'
                     sh "./gradlew -PhappyPath :integration-test:test"
-                    step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/*.xml'])
+                    junit '**/build/test-results/*.xml'
                 }
+              }
             }
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
@@ -253,7 +249,7 @@ html
 
           code.bullet.bespoke-bullet.bespoke-bullet-inactive.
             return this;
-        h2.gothicfont.filegothic Jenkinsfile (2/3)
+        h2.gothicfont.filegothic Jenkinsfile (2/2)
         pre.small.language-javascript
           code.bullet.bespoke-bullet.bespoke-bullet-inactive.
             def gradle = load 'jenkins/gradle.groovy'
@@ -266,35 +262,6 @@ html
                 }
             }
 
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide
-        h2.gothicfont.filegothic Jenkinsfile (3/3)
-        pre.small.language-javascript
-          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-
-            input message: "Deploy Application to QA ?"
-
-          br
-          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
-            stage name: 'Deploy to QA', concurrency: 1
-            node {
-                echo "Application Deployed to QA."
-        
-          br
-          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
-            &nbsp;&nbsp;  withCredentials([[$class: 'UsernamePasswordMultiBinding',
-            &nbsp;&nbsp;  credentialsId: 'MyID', usernameVariable: 'GIT_USERNAME',
-            &nbsp;&nbsp;  passwordVariable: 'GIT_PASSWORD']]) {
-
-            &nbsp;&nbsp;    sh "git tag -a some_tag -m 'Jenkins'"
-            &nbsp;&nbsp;    sh "git push https://${env.GIT_USERNAME}:${env.GIT_PASSWORD}@<REPO> --tags"
-            &nbsp;&nbsp;  }
-            &nbsp;&nbsp;  hipchatSend(message: 'Build tagged')
-            }
-        img.schemash(src='images/credentials.png', style='height:20%')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -328,15 +295,9 @@ html
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-          
+
       +slide
         img.schemash(src='images/ui.png')
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide('gears')
-        h2.gothicfont.smallgothic <span class='important'>Demo Time</span>
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -347,60 +308,17 @@ html
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-      
+
       +slide
         h2.gothicfont.filegothic Multibranch Pipeline job
         img.schemas(src='images/multibranch.png')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars      
-      
-      +slide
-        h2.gothicfont.filegothic Dashboard with detected Branches
-        img.schemas(src='images/multibranchrun.png')
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars  
-
-      +slide
-        h2.gothicfont.smallgothic <span class='important'>Parallel Test Executor</span> Plugin
-        aside(role='note') Unused resources
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars  
-
-      +slide
-        img.schemash(src='images/testp.png')
-        aside(role='note') test execution time last run and split multiple units of equal size
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
 
       +slide
-        h2.gothicfont.filegothic Jenkinsfile
-        pre.small.language-javascript
-          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            def splits = splitTests generateInclusions: true, parallelism: [$class: 'CountDrivenParallelism', size: 3]
-          br
-          code.bullet.bespoke-bullet.bespoke-bullet-inactive.  
-            def branches = [:]
-            for (int i = 0; i < splits.size(); i++) {
-              def split = splits[i]
-              branches["split${i}"] = {
-          br
-          code.bullet.bespoke-bullet.bespoke-bullet-inactive.
-                &nbsp;&nbsp;  node('hi-speed') {
-                &nbsp;&nbsp;    unstash 'source'
-                &nbsp;&nbsp;      writeFile file: (split.includes ? 'inclusions.txt' : 'exclusions.txt'), text: split.list.join("\n")
-                &nbsp;&nbsp;      writeFile file: (split.includes ? 'exclusions.txt' : 'inclusions.txt'), text: ''
-
-                &nbsp;&nbsp;      sh './gradlew clean :test'
-                &nbsp;&nbsp;  }
-                &nbsp;&nbsp;}
-                }    
-          br
-          code.bullet.bespoke-bullet.bespoke-bullet-active.bespoke-bullet-current.
-            parallel branches
+        h2.gothicfont.filegothic Dashboard with detected Branches
+        img.schemas(src='images/multibranchrun.png')
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -410,9 +328,48 @@ html
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-          
-      // +slide
-      //  https://wiki.jenkins-ci.org/display/JENKINS/Jenkins+2.0
+
+      +slide
+        img.schemas(src='images/1ui.png')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        img.schemash(src='images/2ui.png')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        img.schemash(src='images/3ui.png')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        img.schemash(src='images/4ui.png')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        img.schemash(src='images/5ui.png')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        img.schemash(src='images/6ui.png')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+      +slide
+        img.schemash(src='images/7ui.png')
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
 
       +slide('direction')
         h2.gothicfont.smallgothic What is <span class='important'>Coming</span>
@@ -423,6 +380,15 @@ html
       +slide('sea')
         h2.gothicfont.smallgothic <span class='important'>Blue Ocean</span>
         h3. New UX for Jenkins
+        aside(role='note') Now only works together with pipeline
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
+
+      +slide
+        img.schemash(src='images/pipeline-dashboard.png')
+        aside(role='note') Pipeline dashboard
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -435,21 +401,8 @@ html
           i.fa.fa-github &nbsp;lordofthejars
 
       +slide
-        img.schemash(src='images/pipeline-dashboard.png')
-        aside(role='note') Pipeline dashboard
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide
         img.schemash(src='images/failing-pipeline.png')
         aside(role='note') Failing Pipeline
-        div.footer
-          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
-          i.fa.fa-github &nbsp;lordofthejars
-
-      +slide('gears')
-        h2.gothicfont.smallgothic <span class='important'>Demo Time</span>
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
@@ -467,11 +420,17 @@ html
           li Scalability
           li Configuration API
           li Storage Backend Changes
-        
+
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
-          
+
+      +slide('gears')
+        h2.gothicfont.smallgothic <span class='important'>Demo Time</span>
+        div.footer
+          i.fa.fa-twitter &nbsp;alexsotob&nbsp;
+          i.fa.fa-github &nbsp;lordofthejars
+
       +slide('adathink')
         h2.gothicfont.smallgothic Let's <span class='important'>wind down</span>
         div.footer
@@ -486,7 +445,7 @@ html
           li Easy migration from Jenkins 1.X to 2.X
           li More changes in near future
           li Jenkins as Platform
-            
+
         div.footer
           i.fa.fa-twitter &nbsp;alexsotob&nbsp;
           i.fa.fa-github &nbsp;lordofthejars
